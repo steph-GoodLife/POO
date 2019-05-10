@@ -1,7 +1,6 @@
 <?php
-
-
-/**
+/*
+ * 
  * Description of nosClasses01
  *
  * @author webform
@@ -30,10 +29,36 @@ class nosClasses01 {
         */
        protected $attributProtege = true;
        
-    /*
-     *  Constantes de classes ce sont des constantes créés avec le mot clef const NOM_, elles doivent avoir une valeur à la création, elle est toujours lisible en dehors de la classe, mais n'est jamais modifiable, elle est isolées dans la classe, mais peut être lue depuis l'instance de classe OU depuis la classe même
-     */   
-    const MA_CONSTANTE_1 = "Bientôt manger!";
+        /*
+        *  Constantes de classes ce sont des constantes créés avec le mot clef const NOM_, elles doivent avoir une valeur à la création, elle est toujours lisible en dehors de la classe, mais n'est jamais modifiable, elle est isolées dans la classe, mais peut être lue depuis l'instance de classe OU depuis la classe même
+        */   
+        const MA_CONSTANTE_1 = "Bientôt manger!";
+        
+        /*
+         * Méthodes, ce sont des fonctions publiques, privées ou protégées qui permettent d'effectuer des actions, depuis ou dans la classe
+         */
+        
+        
+            /*
+            * Mutators : permettent d'afficher ou modifier des attributs (généralement private ou protected) en vérifiant la validité des données
+            */
+                /*
+                * getters - permet de récupérer depuis l'extérieur un attribut généralement non public
+                */
+               public function getAttributPrive(){
+                   // $this représente l'instance de la classe
+                   return $this->attributPrive;
+               }
+               /*
+                * setters - permet de modifier depuis l'extérieur un attribut généralement non public
+                */
+               public function setAttributPrive(int $id){
+                   if(is_int($id)){
+                       $this->attributPrive=$id;
+                   }else{
+                       return false;
+                   }
+               }
 }
 
 // Encapsulation, nos attributs (variables) même publiques, ne sont pas accessible en dehors de la classe
@@ -85,7 +110,12 @@ echo nosClasses01::MA_CONSTANTE_1;
 $monDeuxiemeObjet = new nosClasses01();
 
 
+echo $monDeuxiemeObjet->getAttributPrive();
+
+$monDeuxiemeObjet->setAttributPrive(33);
+
+echo $monDeuxiemeObjet->getAttributPrive();
+
 echo "<pre>";
 var_dump($monPremierObjet,$monDeuxiemeObjet);
-
- echo "</pre>";
+echo "</pre>";
