@@ -59,6 +59,7 @@ echo $monPremierObjet->attributPublic."<br>";
 // echo $monPremierObjet->attributProtege;
 
 // idem pour modifier
+
 // $monPremierObjet->attributPrive = 20;
 // $monPremierObjet->attributProtege = 20;
 
