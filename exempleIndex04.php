@@ -11,5 +11,14 @@ require_once "exempleClass04.php";
 <body>
 <h1>exempleClass04</h1>
 
+<?php
+
+$perso1 = new exempleClass04();
+$perso2 = new exempleClass04();
+
+
+?>
+
+
 </body>
 </html>
