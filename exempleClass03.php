@@ -62,7 +62,7 @@ class exempleClass03
         {
             $this->defense = $defense;
         }
-        
+
         /**
          * @param mixed $vie
          */
