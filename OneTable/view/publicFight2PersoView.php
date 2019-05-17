@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Moi">
 
-    <title>Création d'un Personnages</title>
+    <title>Combat de 2 personnages au hasard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://localhost/startbootstrap-bare-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,10 +32,10 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="?createperso">Create a Personnage</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="?combatHasard">Combat de 2 personnages au hasard</a>
                 </li>
             </ul>
@@ -52,12 +52,32 @@
         </div>
         <div class="col-lg-8 text-left">
 
-            <h3><?=$perso->getTheName()?></h3>
-            <p>Endurance: <?=$perso->getTheEndurance()?> </p>
-            <p>Attaque: <?=$perso->getTheAttac()?> </p>
-            <p>Défense: <?=$perso->getThedefense()?> </p>
-            <p>Expérience: <?=$perso->getTheExp()?> </p>
-            <p>Total des combats: <?=$perso->getTheFight()?> </p>
+            <?php
+            foreach ($nosPerso AS $item){
+                ?>
+                <h3><?=$item->getTheName()?></h3>
+                <p>Endurance: <?=$item->getTheEndurance()?> </p>
+                <p>Attaque: <?=$item->getTheAttac()?> </p>
+                <p>Défense: <?=$item->getThedefense()?> </p>
+                <p>Expérience: <?=$item->getTheExp()?> </p>
+                <p>Total des combats: <?=$item->getTheFight()?> </p>
+                <?php
+            }
+
+            ?>
+<h3>Début du combat</h3>
+            <?php
+            // combattants
+            $p1 = $nosPerso[0];
+            $p2 = $nosPerso[1];
+
+            while($p1->getTheEndurance()>0&&$p2->getTheEndurance()>0) {
+                echo $p1->attaquerPerso($p2);
+                echo $p2->attaquerPerso($p1);
+            }
+
+
+            ?>
 
 
 
