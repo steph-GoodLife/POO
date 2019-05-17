@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Moi">
 
-    <title>Notre template</title>
+    <title>Gestion de Personnages</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://localhost/startbootstrap-bare-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Titre</a>
+        <a class="navbar-brand" href="#">Personnage</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,18 +28,12 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" href="./">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="?create2perso">Create 2 Personnages</a>
                 </li>
             </ul>
         </div>
@@ -50,13 +44,11 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center">
-            <h1 class="mt-5">A Bootstrap 4 Starter Template</h1>
-            <p class="lead">Complete with pre-defined file paths and responsive navigation!</p>
+            <h1 class="mt-5">Affichage de tous les Personnages de la DB</h1>
+            <p class="lead"><?=Personnage::EXPLICATION?></p>
         </div>
         <div class="col-lg-8 text-left">
-            <pre><?php
-            var_dump($perso1,$perso2);
-            ?></pre>
+
         </div>
     </div>
 </div>

@@ -103,7 +103,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="791" />
     <option name="width" value="1143" />
     <option name="height" value="1047" />
@@ -121,6 +121,11 @@
             <path>
               <item name="oriente-objet" type="b2602c69:ProjectViewProjectNode" />
               <item name="oriente-objet" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oriente-objet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oriente-objet" type="462c0819:PsiDirectoryNode" />
+              <item name="OneTable" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="oriente-objet" type="b2602c69:ProjectViewProjectNode" />
@@ -175,12 +180,12 @@
       <workItem from="1557483325839" duration="1232000" />
       <workItem from="1557487097654" duration="6170000" />
       <workItem from="1557739080809" duration="2794000" />
-      <workItem from="1558078581130" duration="599000" />
+      <workItem from="1558078581130" duration="602000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17197000" />
+    <option name="totallyTimeSpent" value="17200000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="791" y="0" width="1143" height="1047" extended-state="0" />

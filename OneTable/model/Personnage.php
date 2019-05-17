@@ -26,16 +26,27 @@ class Personnage
         if (!empty($datas)) {
             $this->hydrate($datas);
         }else{
+
+            // si on crée un nouveau personnage, on donne des valeurs par défaut au hasard grâce au lancé de dé
+
             // on met l'attaque à jour en prenant l'attaque par défaut à laquelle on rajoute un dé (première clef => total des dés)
             $this->setTheAttac((
                 $this->getTheAttac()
                 +$this->lancerDes(1)[0])
             );
+
             // idem pour défense
             $this->setThedefense((
                 $this->getThedefense()
                 +$this->lancerDes(1)[0])
             );
+
+            // idem pour l'endurance
+            $this->setTheEndurance((
+                $this->getTheEndurance()
+                +$this->lancerDes(3)[0])
+            );
+
         }
     }
 
