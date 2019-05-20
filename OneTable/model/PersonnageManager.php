@@ -31,4 +31,14 @@ class PersonnageManager
 
     }
 
+    // SELECT 2 PERSONNAGE by random
+    public function read2Personnage(){
+
+        $sql = "SELECT * FROM personnage ORDER BY RAND() LIMIT 2;";
+        $recup = mysqli_query($this->db,$sql) or die($this->db);
+
+        return mysqli_fetch_all($recup,MYSQLI_ASSOC);
+
+    }
+
 }

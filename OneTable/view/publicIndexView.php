@@ -33,7 +33,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?create2perso">Create 2 Personnages</a>
+                    <a class="nav-link" href="?createperso">Create a Personnage</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?combatHasard">Combat de 2 personnages au hasard</a>
                 </li>
             </ul>
         </div>
@@ -48,7 +51,18 @@
             <p class="lead"><?=Personnage::EXPLICATION?></p>
         </div>
         <div class="col-lg-8 text-left">
-
+            <?php
+            foreach ($nosPerso AS $item){
+                ?>
+            <h3><?=$item->getTheName()?></h3>
+                <p>Endurance: <?=$item->getTheEndurance()?> </p>
+                <p>Attaque: <?=$item->getTheAttac()?> </p>
+                <p>Défense: <?=$item->getThedefense()?> </p>
+                <p>Expérience: <?=$item->getTheExp()?> </p>
+                <p>Total des combats: <?=$item->getTheFight()?> </p>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>

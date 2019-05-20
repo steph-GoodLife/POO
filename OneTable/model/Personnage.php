@@ -25,41 +25,12 @@ class Personnage
         // si le tableau n'est pas vide, tentative d'hydratation
         if (!empty($datas)) {
             $this->hydrate($datas);
+
         }else{
-
             // si on crée un nouveau personnage, on donne des valeurs par défaut au hasard grâce au lancé de dé
-
-            // on met l'attaque à jour en prenant l'attaque par défaut à laquelle on rajoute un dé (première clef => total des dés)
-            $this->setTheAttac((
-                $this->getTheAttac()
-                +$this->lancerDes(1)[0])
-            );
-
-            // idem pour défense
-            $this->setThedefense((
-                $this->getThedefense()
-                +$this->lancerDes(1)[0])
-            );
-
-            // idem pour l'endurance
-            $this->setTheEndurance((
-                $this->getTheEndurance()
-                +$this->lancerDes(3)[0])
-            );
+            $this->choisirAuHasard();
 
         }
-    }
-
-    // permet de lancer des dés de 6, $nb représente le nombre de dés, return array contenant les scores de chaque dés, la première entrée est le total des dès
-    public function lancerDes(int $nb){
-        $nbTotal = 0;
-        for($i=1;$i<=$nb;$i++){
-            $lancerDeDe = mt_rand(1,6);
-            $tabDes[] = $lancerDeDe;
-            $nbTotal += $lancerDeDe;
-        }
-        array_unshift($tabDes,$nbTotal);
-        return $tabDes;
     }
 
     // hydratation: transformations des clefs d'un tableau en setters et utilisation des valeurs pour à jour nos attributs
@@ -73,6 +44,94 @@ class Personnage
         }
     }
 
+    protected function choisirAuHasard(){
+        // on met l'attaque à jour en prenant l'attaque par défaut à laquelle on rajoute un dé (première clef => total des dés)
+        $this->setTheAttac((
+            $this->getTheAttac()
+            +$this->lancerDes(1)[0])
+        );
+
+        // idem pour défense
+        $this->setThedefense((
+            $this->getThedefense()
+            +$this->lancerDes(1)[0])
+        );
+
+        // idem pour l'endurance
+        $this->setTheEndurance((
+            $this->getTheEndurance()
+            +$this->lancerDes(3)[0])
+        );
+    }
+
+
+    // permet de lancer des dés de 6, $nb représente le nombre de dés, return array contenant les scores de chaque dés, la première entrée est le total des dès
+    public function lancerDes(int $nb): array {
+        $nbTotal = 0;
+        for($i=1;$i<=$nb;$i++){
+            $lancerDeDe = mt_rand(1,6);
+            $tabDes[] = $lancerDeDe;
+            $nbTotal += $lancerDeDe;
+        }
+        array_unshift($tabDes,$nbTotal);
+        return $tabDes;
+    }
+
+
+    // création dynamique de nom d'un personnage
+    public function createTheName(int $nbletters = 6){
+        $string="abcdefghijklmnopqrstuvwxyz";
+        $nbstring = strlen($string);
+        $sortie = "";
+        for($i=0;$i<$nbletters;$i++){
+            $c = mt_rand(0,$nbstring-1);
+            $sortie .= $string[$c];
+        }
+        $this->setTheName(ucfirst($sortie));
+    }
+
+    // si l'instance actuelle ($this) attaque une autre instance de la classe Personnage ($otherPerso)
+    public function attaquerPerso(Personnage $otherPerso){
+
+        // calculs attaque
+        $attaque_name = $this->getTheName();
+        $attaque_this = $this->getTheAttac();
+        $desAt3 = $this->lancerDes(3)[0];
+        $tot_attaque = $attaque_this+$desAt3;
+
+
+        // calculs défense
+        $defense_name = $otherPerso->getTheName();
+        $defense_otherPerso = $otherPerso->getThedefense();
+        $desDef3 = $otherPerso->lancerDes(3)[0];
+        $tot_defense = $defense_otherPerso+$desDef3;
+
+        // Attaque plus forte que la défense
+        if($tot_attaque>$tot_defense){
+            $blesse = $tot_attaque-$tot_defense;
+            $reste_vie = $otherPerso->getTheEndurance()-$blesse;
+            $otherPerso->setTheEndurance($reste_vie);
+
+            echo "<p>$defense_name a été blessé par $attaque_name:<br>Défense: $defense_otherPerso + $desDef3 (3 dés de 6) = <strong>$tot_defense</strong> | Contre | Attaque: $attaque_this + $desAt3 (3 dés de 6) = <strong>$tot_attaque</strong> = -$blesse pour $defense_name</p>";
+
+            // le défenseur est mort
+            if($otherPerso->getTheEndurance()<=0){
+                $otherPerso->estMort($this);
+                exit();
+            }
+        }else{
+            echo "<p>$defense_name n'a pas été blessé par $attaque_name:<br>Défense: $defense_otherPerso + $desDef3 (3 dés de 6) = <strong>$tot_defense</strong> | Contre | Attaque: $attaque_this + $desAt3 (3 dés de 6) = <strong>$tot_attaque</strong></p>";
+        }
+
+    }
+
+    protected function estMort(Personnage $otherPerso){
+        $this->setTheFight($this->getTheFight()+1);
+        $this->setTheExp($this->getTheExp()+1);
+        $otherPerso->setTheFight($otherPerso->getTheFight()+1);
+        echo "<h2>Bravo {$otherPerso->getTheName()}, vous avez battu {$this->getTheName()}</h2>";
+        return false;
+    }
 
     // GETTERS AND SETTERS (MUTATORS)
     public function getIdPersonnage()
